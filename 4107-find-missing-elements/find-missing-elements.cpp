@@ -16,7 +16,7 @@ public:
         int diff = large-small-1;
         int btw = n-2;
 
-        if(diff==btw)return ans;//no missing number 
+        if(diff==btw)return {};//no missing number 
 
         else{//missing number
             for(int i=0;i<diff;i++){
