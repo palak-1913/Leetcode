@@ -11,33 +11,38 @@
 class Solution {
 public:
     ListNode* reverse(ListNode*head){
-        ListNode*dummy = new ListNode(-1);
-        ListNode*curr = head,*Next = NULL ,*prev=dummy;
+        ListNode*curr = head,*prev=NULL,*Next=NULL;
+
         while(curr!=NULL){
             Next = curr->next;
-            ListNode*newNode = new ListNode(curr->val);
-            newNode->next = prev->next;
-            prev->next = newNode;
+            curr->next = prev;
+            prev = curr;
             curr = Next;
-
         }
-        return dummy->next;
+        return prev;
     }
     int pairSum(ListNode* head) {
-        ListNode*revHead = reverse(head);
-        ListNode*temp = head;
-        int len=0;
-        while(temp!=NULL){
-            len++;
-            temp = temp->next;
+        //left middle
+        ListNode*slow=head;
+        ListNode*fast=head;
+        while(fast->next!=NULL && fast->next->next!=NULL){
+            slow = slow->next;
+            fast = fast->next->next;
         }
 
-        int max_sum=0;
-        for(int i=1;i<=len/2;i++){
-            max_sum = max(max_sum,revHead->val+head->val);
-            revHead = revHead->next;
+        ListNode*sec_head = slow->next;
+        slow->next=NULL;
+
+        sec_head = reverse(sec_head);
+
+        int max_sum = 0;
+        while(sec_head!=NULL && head!=NULL){
+            max_sum = max(max_sum,head->val+sec_head->val);
+            sec_head = sec_head->next;
             head = head->next;
         }
         return max_sum;
+
+
     }
 };
