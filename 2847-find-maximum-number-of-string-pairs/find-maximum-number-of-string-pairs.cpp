@@ -1,6 +1,7 @@
 class Solution {
 public:
     int maximumNumberOfStringPairs(vector<string>& words) {
+        // brute force
         int n = words.size();
         int count=0;
         for(int i=0;i<n;i++){
