@@ -17,7 +17,7 @@ public:
     }
     
     void add(int index, int val) {
-        int prev = nums2[index];
+        int prev = nums2[index];//yeh kaam ek array m nhi array update hogi aur uss update value ko map m dalna pdega 
         m2[nums2[index]]--;
         nums2[index]+=val;
         m2[nums2[index]]++;
