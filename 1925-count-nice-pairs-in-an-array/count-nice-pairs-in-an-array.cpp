@@ -9,27 +9,21 @@ public:
         }
         return rev;
     }
-
-    long long fact(int n,int r){
-        long long curr = 1;
-            for(int j=0;j<r;j++){
-                curr= curr*(n-j)/(j+1);
-            }
-
-        return curr;
-    }
     int countNicePairs(vector<int>& nums) {
         for(int i=0;i<nums.size();i++) nums[i] = nums[i] - rev(nums[i]);
         unordered_map<int,int>m;
 
-        for(int i=0;i<nums.size();i++) m[nums[i]]++;//freq cal
-
-        long long count=0;
-        long long MOD = 1e9 + 7;
-        for(auto p:m){
-            count=(count+fact(p.second,2))%MOD;
+        int count=0;
+        for(int i=0;i<nums.size();i++){
+            count = count%1000000007;
+            if(m.find(nums[i])!=m.end()){
+                count+=m[nums[i]];
+                m[nums[i]]++;
+            }
+            else m[nums[i]]++;
+            
         }
-        return count;
+        return count%1000000007;
 
 
     }
