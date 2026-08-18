@@ -1,12 +1,12 @@
 class Solution {
 public:
     int subarraySum(vector<int>& nums, int k) {
+        // find prefix sum
         int n = nums.size();
         int count=0;
-        for(int i=1;i<n;i++){
-            nums[i]+=nums[i-1];
-        }
-        
+        for(int i=1;i<n;i++) nums[i]+=nums[i-1];
+
+        // make map and insert ele and add freq according to the freq of difference of ele
         unordered_map<int,int>m;
         for(int i=0;i<n;i++){
             if(nums[i]==k) count++;
@@ -14,6 +14,7 @@ public:
             if(m.find(diff)!=m.end()) count+=m[diff];
             m[nums[i]]++;
         }
+
         return count;
     }
 };
